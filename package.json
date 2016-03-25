@@ -1,0 +1,37 @@
+{
+  "author": {
+    "email": "joeleonard@gmail.com",
+    "name": "Joe Leonard"
+  },
+  "bugs": {
+    "url": "https://github.com/gijoehosaphat/react-native-realtime-pusher/issues"
+  },
+  "dependencies": {},
+  "description": "React Native module implementing the Pusher Realtime API",
+  "devDependencies": {},
+  "homepage": "https://github.com/gijoehosaphat/react-native-realtime-pusher#readme",
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "gijoehosaphat",
+      "email": "joeleonard@gmail.com"
+    }
+  ],
+  "name": "react-native-realtime-pusher",
+  "optionalDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/gijoehosaphat/react-native-realtime-pusher.git"
+  },
+  "version": "1.0.3",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "android",
+    "pusher"
+  ],
+  "peerDependencies": {
+    "react-native": ">=0.20.0"
+  }
+}
