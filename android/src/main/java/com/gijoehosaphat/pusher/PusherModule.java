@@ -58,6 +58,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
   private ReactApplicationContext mContext = null;
 
   private String authEndPoint = null;
+  private String authToken = null;
   private String messageEndPoint = null;
   private String appKey = null;
   private Pusher pusher = null;
@@ -75,8 +76,9 @@ public class PusherModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void initialize(String host, String authPath, String messageSubPath, String appKey) {
+  public void initialize(String host, String authPath, String messageSubPath, String appKey, String authToken) {
     this.authEndPoint = host + authPath;
+    this.authToken = authToken;
     this.messageEndPoint = host + messageSubPath;
     this.appKey = appKey;
   }
@@ -86,13 +88,14 @@ public class PusherModule extends ReactContextBaseJavaModule {
     //Define our authorization headers...
     HashMap<String, String> authHeaders = new HashMap<>();
     authHeaders.put("Content-Type", "application/x-www-form-urlencoded");
+    authHeaders.put("Authorization", this.authToken);
 
     //Set up our HttpAuthorizer
     HttpAuthorizer authorizer = new HttpAuthorizer(this.authEndPoint);
     authorizer.setHeaders(authHeaders);
 
     //Apply to pusher options and create our Pusher object.
-    PusherOptions options = new PusherOptions().setAuthorizer(authorizer);
+    PusherOptions options = new PusherOptions().setEncrypted(true).setAuthorizer(authorizer);
     this.pusher = new Pusher(appKey, options);
 
     //Connect and handle events...

@@ -3,8 +3,8 @@
 var { NativeModules, DeviceEventEmitter } = require('react-native')
 
 const Pusher = {
-  initialize(host, authPath, messageSubPath, appKey) {
-    NativeModules.Pusher.initialize(host, authPath, messageSubPath, appKey)
+  initialize(host, authPath, messageSubPath, appKey, authToken) {
+    NativeModules.Pusher.initialize(host, authPath, messageSubPath, appKey, authToken)
   },
   connect(eventHandler) {
     NativeModules.Pusher.connect()
