@@ -21,7 +21,7 @@ import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
 import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
+import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
@@ -286,35 +286,22 @@ public class PusherModule extends ReactContextBaseJavaModule {
     try {
       HttpEntity entity = new StringEntity(json);
       AsyncHttpClient client = new AsyncHttpClient();
-      client.post(this.mContext, this.messageEndPoint + "/" + channelName + "/" + channelEvent, entity, "application/json", new JsonHttpResponseHandler() {
+      client.addHeader("Authorization", this.authToken);
+      client.post(this.mContext, this.messageEndPoint + "/" + channelName + "/" + channelEvent, entity, "application/json", new AsyncHttpResponseHandler() {
         @Override
-        public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-          Gson gson = new Gson();
-          LinkedTreeMap<String, Object> mapFields = gson.fromJson(response.toString(), LinkedTreeMap.class);
-          WritableMap writableMap = recursivelyDeconstructMap(mapFields);
-
+        public void onSuccess(int statusCode, Header[] headers, byte[] response) {
           WritableMap params = Arguments.createMap();
           params.putString("eventName", "onMessageSuccess");
           params.putString("channelName", channelName);
-          params.putMap("response", writableMap);
           params.putInt("statusCode", statusCode);
           sendEvent(params);
         }
 
         @Override
-        public void onFailure(int statusCode, Header[] headers, String response, Throwable throwable) {
+        public void onFailure(int statusCode, Header[] headers, byte[] response, Throwable throwable) {
           WritableMap params = Arguments.createMap();
           params.putString("eventName", "onMessageFailure");
-          params.putString("channelName", channelName);
-          params.putString("response", response);
-          params.putInt("statusCode", statusCode);
-          sendEvent(params);
-        }
-
-        @Override
-        public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject response) {
-          WritableMap params = Arguments.createMap();
-          params.putString("eventName", "onMessageFailure");
+          params.putString("error", throwable.getMessage());
           params.putString("channelName", channelName);
           params.putInt("statusCode", statusCode);
           sendEvent(params);
