@@ -24,7 +24,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/gijoehosaphat/react-native-realtime-pusher.git"
   },
-  "version": "1.0.4",
+  "version": "1.0.5",
   "keywords": [
     "react-component",
     "react-native",
