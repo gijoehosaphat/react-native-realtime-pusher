@@ -64,9 +64,9 @@ public class PusherModule extends ReactContextBaseJavaModule {
   private Pusher pusher = null;
   private List<String> channels = new ArrayList<String>();
 
-  public PusherModule(ReactApplicationContext reactContext, Activity mActivity) {
+  public PusherModule(ReactApplicationContext reactContext) {
     super(reactContext);
-    this.mActivity = mActivity;
+    this.mActivity = getCurrentActivity();
     this.mContext = reactContext;
   }
 

@@ -12,16 +12,14 @@ import java.util.*;
 
 public class PusherPackage implements ReactPackage {
 
-    private Activity mActivity = null;
+    public PusherPackage() {
 
-    public PusherPackage(Activity activity) {
-        mActivity = activity;
     }
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new PusherModule(reactContext, mActivity));
+        modules.add(new PusherModule(reactContext));
         return modules;
     }
 
