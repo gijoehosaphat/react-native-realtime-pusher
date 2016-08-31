@@ -20,9 +20,14 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-import com.loopj.android.http.RequestParams;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import okhttp3.Callback;
+import okhttp3.Call;
+import okhttp3.MediaType;
+
 import com.pusher.client.Pusher;
 import com.pusher.client.PusherOptions;
 import com.pusher.client.channel.User;
@@ -48,10 +53,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.io.IOException;
-
-import cz.msebera.android.httpclient.Header;
-import cz.msebera.android.httpclient.entity.StringEntity;
-import cz.msebera.android.httpclient.HttpEntity;
 
 public class PusherModule extends ReactContextBaseJavaModule {
   private Activity mActivity = null;
@@ -283,37 +284,38 @@ public class PusherModule extends ReactContextBaseJavaModule {
     Gson gson = new Gson();
     String json = gson.toJson(map);
 
-    try {
-      HttpEntity entity = new StringEntity(json);
-      AsyncHttpClient client = new AsyncHttpClient();
-      client.addHeader("Authorization", this.authToken);
-      client.post(this.mContext, this.messageEndPoint + "/" + channelName + "/" + channelEvent, entity, "application/json", new AsyncHttpResponseHandler() {
-        @Override
-        public void onSuccess(int statusCode, Header[] headers, byte[] response) {
+    OkHttpClient client = new OkHttpClient();
+    Request request = new Request.Builder()
+      .url(this.messageEndPoint + "/" + channelName + "/" + channelEvent)
+      .header("Authorization", this.authToken)
+      .addHeader("Content-Type", "application/json")
+      .post(RequestBody.create(MediaType.parse("application/json"), json))
+      .build();
+
+    client.newCall(request).enqueue(new Callback() {
+      @Override public void onResponse(Call call, Response response) throws IOException {
+        if (!response.isSuccessful()) {
           WritableMap params = Arguments.createMap();
-          params.putString("eventName", "onMessageSuccess");
+          params.putString("eventName", "onMessageFailure");
           params.putString("channelName", channelName);
-          params.putInt("statusCode", statusCode);
+          params.putString("exception", response.toString());
           sendEvent(params);
         }
 
-        @Override
-        public void onFailure(int statusCode, Header[] headers, byte[] response, Throwable throwable) {
-          WritableMap params = Arguments.createMap();
-          params.putString("eventName", "onMessageFailure");
-          params.putString("error", throwable.getMessage());
-          params.putString("channelName", channelName);
-          params.putInt("statusCode", statusCode);
-          sendEvent(params);
-        }
-      });
-    } catch (IOException ioe) {
-      WritableMap params = Arguments.createMap();
-      params.putString("eventName", "onMessageFailure");
-      params.putString("channelName", channelName);
-      params.putString("exception", ioe.toString());
-      sendEvent(params);
-    }
+        WritableMap params = Arguments.createMap();
+        params.putString("eventName", "onMessageSuccess");
+        params.putString("channelName", channelName);
+        sendEvent(params);
+      }
+
+      @Override public void onFailure(Call call, IOException e) {
+        WritableMap params = Arguments.createMap();
+        params.putString("eventName", "onMessageFailure");
+        params.putString("error", e.getMessage());
+        params.putString("channelName", channelName);
+        sendEvent(params);
+      }
+    });
   }
 
   //A general Channel event...

@@ -21,7 +21,7 @@ repositories {
 
 dependencies {
   compile 'com.pusher:pusher-java-client:1.0.2'
-  compile 'com.loopj.android:android-async-http:1.4.9'
+  compile 'com.squareup.okhttp3:okhttp:3.4.1'
   compile 'com.google.code.gson:gson:2.2.4'
   compile 'com.facebook.react:react-native:0.20.+'
 }
