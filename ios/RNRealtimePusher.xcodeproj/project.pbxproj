@@ -1,0 +1,442 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		667F821E1DECA34B00FDAD98 /* Pusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F821D1DECA34B00FDAD98 /* Pusher.m */; };
+		667F82521DECA38200FDAD98 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82211DECA38200FDAD98 /* NSDictionary+QueryString.m */; };
+		667F82531DECA38200FDAD98 /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82221DECA38200FDAD98 /* NSDictionary+StringValue.m */; };
+		667F82541DECA38200FDAD98 /* NSString+Hashing.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82231DECA38200FDAD98 /* NSString+Hashing.m */; };
+		667F82551DECA38200FDAD98 /* PTBlockEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F822C1DECA38200FDAD98 /* PTBlockEventListener.m */; };
+		667F82561DECA38200FDAD98 /* PTJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F822E1DECA38200FDAD98 /* PTJSON.m */; };
+		667F82571DECA38200FDAD98 /* PTPusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82301DECA38200FDAD98 /* PTPusher.m */; };
+		667F82581DECA38200FDAD98 /* PTPusherAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82321DECA38200FDAD98 /* PTPusherAPI.m */; };
+		667F82591DECA38200FDAD98 /* PTPusherChannel.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82341DECA38200FDAD98 /* PTPusherChannel.m */; };
+		667F825A1DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82371DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m */; };
+		667F825B1DECA38200FDAD98 /* PTPusherConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82391DECA38200FDAD98 /* PTPusherConnection.m */; };
+		667F825C1DECA38200FDAD98 /* PTPusherEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F823D1DECA38200FDAD98 /* PTPusherEvent.m */; };
+		667F825D1DECA38200FDAD98 /* PTPusherEventDispatcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F823F1DECA38200FDAD98 /* PTPusherEventDispatcher.m */; };
+		667F825E1DECA38200FDAD98 /* PTPusherMockConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82431DECA38200FDAD98 /* PTPusherMockConnection.m */; };
+		667F825F1DECA38200FDAD98 /* PTTargetActionEventListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82451DECA38200FDAD98 /* PTTargetActionEventListener.m */; };
+		667F82601DECA38200FDAD98 /* PTURLRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82471DECA38200FDAD98 /* PTURLRequestOperation.m */; };
+		667F82611DECA38200FDAD98 /* SRWebSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82511DECA38200FDAD98 /* SRWebSocket.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		667F820E1DECA2F700FDAD98 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		662A9AEB1DECBF8E0040A499 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
+		662A9AED1DECBFB70040A499 /* libicucore.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.A.tbd; path = usr/lib/libicucore.A.tbd; sourceTree = SDKROOT; };
+		667F82101DECA2F700FDAD98 /* libRNRealtimePusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNRealtimePusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		667F821C1DECA34B00FDAD98 /* Pusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pusher.h; sourceTree = "<group>"; };
+		667F821D1DECA34B00FDAD98 /* Pusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pusher.m; sourceTree = "<group>"; };
+		667F82211DECA38200FDAD98 /* NSDictionary+QueryString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+QueryString.m"; sourceTree = "<group>"; };
+		667F82221DECA38200FDAD98 /* NSDictionary+StringValue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+StringValue.m"; sourceTree = "<group>"; };
+		667F82231DECA38200FDAD98 /* NSString+Hashing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Hashing.m"; sourceTree = "<group>"; };
+		667F82251DECA38200FDAD98 /* NSDictionary+QueryString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+QueryString.h"; sourceTree = "<group>"; };
+		667F82261DECA38200FDAD98 /* NSDictionary+StringValue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+StringValue.h"; sourceTree = "<group>"; };
+		667F82271DECA38200FDAD98 /* NSString+Hashing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Hashing.h"; sourceTree = "<group>"; };
+		667F82281DECA38200FDAD98 /* PTBlockEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTBlockEventListener.h; sourceTree = "<group>"; };
+		667F82291DECA38200FDAD98 /* PTJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTJSON.h; sourceTree = "<group>"; };
+		667F822A1DECA38200FDAD98 /* PTPusherChannel_Private.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel_Private.h; sourceTree = "<group>"; };
+		667F822B1DECA38200FDAD98 /* PTTargetActionEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTTargetActionEventListener.h; sourceTree = "<group>"; };
+		667F822C1DECA38200FDAD98 /* PTBlockEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTBlockEventListener.m; sourceTree = "<group>"; };
+		667F822D1DECA38200FDAD98 /* PTEventListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTEventListener.h; sourceTree = "<group>"; };
+		667F822E1DECA38200FDAD98 /* PTJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTJSON.m; sourceTree = "<group>"; };
+		667F822F1DECA38200FDAD98 /* PTPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusher.h; sourceTree = "<group>"; };
+		667F82301DECA38200FDAD98 /* PTPusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusher.m; sourceTree = "<group>"; };
+		667F82311DECA38200FDAD98 /* PTPusherAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherAPI.h; sourceTree = "<group>"; };
+		667F82321DECA38200FDAD98 /* PTPusherAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherAPI.m; sourceTree = "<group>"; };
+		667F82331DECA38200FDAD98 /* PTPusherChannel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannel.h; sourceTree = "<group>"; };
+		667F82341DECA38200FDAD98 /* PTPusherChannel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannel.m; sourceTree = "<group>"; };
+		667F82351DECA38200FDAD98 /* PTPusherChannelAuthorizationDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelAuthorizationDelegate.h; sourceTree = "<group>"; };
+		667F82361DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherChannelServerBasedAuthorization.h; sourceTree = "<group>"; };
+		667F82371DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherChannelServerBasedAuthorization.m; sourceTree = "<group>"; };
+		667F82381DECA38200FDAD98 /* PTPusherConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherConnection.h; sourceTree = "<group>"; };
+		667F82391DECA38200FDAD98 /* PTPusherConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherConnection.m; sourceTree = "<group>"; };
+		667F823A1DECA38200FDAD98 /* PTPusherDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherDelegate.h; sourceTree = "<group>"; };
+		667F823B1DECA38200FDAD98 /* PTPusherErrors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherErrors.h; sourceTree = "<group>"; };
+		667F823C1DECA38200FDAD98 /* PTPusherEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEvent.h; sourceTree = "<group>"; };
+		667F823D1DECA38200FDAD98 /* PTPusherEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEvent.m; sourceTree = "<group>"; };
+		667F823E1DECA38200FDAD98 /* PTPusherEventDispatcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventDispatcher.h; sourceTree = "<group>"; };
+		667F823F1DECA38200FDAD98 /* PTPusherEventDispatcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherEventDispatcher.m; sourceTree = "<group>"; };
+		667F82401DECA38200FDAD98 /* PTPusherEventPublisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherEventPublisher.h; sourceTree = "<group>"; };
+		667F82411DECA38200FDAD98 /* PTPusherMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMacros.h; sourceTree = "<group>"; };
+		667F82421DECA38200FDAD98 /* PTPusherMockConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherMockConnection.h; sourceTree = "<group>"; };
+		667F82431DECA38200FDAD98 /* PTPusherMockConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTPusherMockConnection.m; sourceTree = "<group>"; };
+		667F82441DECA38200FDAD98 /* PTPusherPresenceChannelDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTPusherPresenceChannelDelegate.h; sourceTree = "<group>"; };
+		667F82451DECA38200FDAD98 /* PTTargetActionEventListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTTargetActionEventListener.m; sourceTree = "<group>"; };
+		667F82461DECA38200FDAD98 /* PTURLRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PTURLRequestOperation.h; sourceTree = "<group>"; };
+		667F82471DECA38200FDAD98 /* PTURLRequestOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PTURLRequestOperation.m; sourceTree = "<group>"; };
+		667F82481DECA38200FDAD98 /* LibPusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LibPusher.h; sourceTree = "<group>"; };
+		667F82491DECA38200FDAD98 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		667F824A1DECA38200FDAD98 /* README-DIST.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "README-DIST.txt"; sourceTree = "<group>"; };
+		667F824C1DECA38200FDAD98 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		667F824D1DECA38200FDAD98 /* README.rst */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.rst; sourceTree = "<group>"; };
+		667F824F1DECA38200FDAD98 /* SocketRocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketRocket.h; sourceTree = "<group>"; };
+		667F82501DECA38200FDAD98 /* SRWebSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SRWebSocket.h; sourceTree = "<group>"; };
+		667F82511DECA38200FDAD98 /* SRWebSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SRWebSocket.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		667F820D1DECA2F700FDAD98 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		662A9AEA1DECBF8D0040A499 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				662A9AED1DECBFB70040A499 /* libicucore.A.tbd */,
+				662A9AEB1DECBF8E0040A499 /* libicucore.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		667F82071DECA2F700FDAD98 = {
+			isa = PBXGroup;
+			children = (
+				667F821F1DECA38200FDAD98 /* libPusher */,
+				667F824B1DECA38200FDAD98 /* SocketRocket */,
+				667F82121DECA2F700FDAD98 /* RNRealtimePusher */,
+				667F82111DECA2F700FDAD98 /* Products */,
+				662A9AEA1DECBF8D0040A499 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		667F82111DECA2F700FDAD98 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				667F82101DECA2F700FDAD98 /* libRNRealtimePusher.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		667F82121DECA2F700FDAD98 /* RNRealtimePusher */ = {
+			isa = PBXGroup;
+			children = (
+				667F821C1DECA34B00FDAD98 /* Pusher.h */,
+				667F821D1DECA34B00FDAD98 /* Pusher.m */,
+			);
+			path = RNRealtimePusher;
+			sourceTree = "<group>";
+		};
+		667F821F1DECA38200FDAD98 /* libPusher */ = {
+			isa = PBXGroup;
+			children = (
+				667F82201DECA38200FDAD98 /* Library */,
+				667F82491DECA38200FDAD98 /* LICENSE */,
+				667F824A1DECA38200FDAD98 /* README-DIST.txt */,
+			);
+			path = libPusher;
+			sourceTree = "<group>";
+		};
+		667F82201DECA38200FDAD98 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				667F82211DECA38200FDAD98 /* NSDictionary+QueryString.m */,
+				667F82221DECA38200FDAD98 /* NSDictionary+StringValue.m */,
+				667F82231DECA38200FDAD98 /* NSString+Hashing.m */,
+				667F82241DECA38200FDAD98 /* Private Headers */,
+				667F822C1DECA38200FDAD98 /* PTBlockEventListener.m */,
+				667F822D1DECA38200FDAD98 /* PTEventListener.h */,
+				667F822E1DECA38200FDAD98 /* PTJSON.m */,
+				667F822F1DECA38200FDAD98 /* PTPusher.h */,
+				667F82301DECA38200FDAD98 /* PTPusher.m */,
+				667F82311DECA38200FDAD98 /* PTPusherAPI.h */,
+				667F82321DECA38200FDAD98 /* PTPusherAPI.m */,
+				667F82331DECA38200FDAD98 /* PTPusherChannel.h */,
+				667F82341DECA38200FDAD98 /* PTPusherChannel.m */,
+				667F82351DECA38200FDAD98 /* PTPusherChannelAuthorizationDelegate.h */,
+				667F82361DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.h */,
+				667F82371DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m */,
+				667F82381DECA38200FDAD98 /* PTPusherConnection.h */,
+				667F82391DECA38200FDAD98 /* PTPusherConnection.m */,
+				667F823A1DECA38200FDAD98 /* PTPusherDelegate.h */,
+				667F823B1DECA38200FDAD98 /* PTPusherErrors.h */,
+				667F823C1DECA38200FDAD98 /* PTPusherEvent.h */,
+				667F823D1DECA38200FDAD98 /* PTPusherEvent.m */,
+				667F823E1DECA38200FDAD98 /* PTPusherEventDispatcher.h */,
+				667F823F1DECA38200FDAD98 /* PTPusherEventDispatcher.m */,
+				667F82401DECA38200FDAD98 /* PTPusherEventPublisher.h */,
+				667F82411DECA38200FDAD98 /* PTPusherMacros.h */,
+				667F82421DECA38200FDAD98 /* PTPusherMockConnection.h */,
+				667F82431DECA38200FDAD98 /* PTPusherMockConnection.m */,
+				667F82441DECA38200FDAD98 /* PTPusherPresenceChannelDelegate.h */,
+				667F82451DECA38200FDAD98 /* PTTargetActionEventListener.m */,
+				667F82461DECA38200FDAD98 /* PTURLRequestOperation.h */,
+				667F82471DECA38200FDAD98 /* PTURLRequestOperation.m */,
+				667F82481DECA38200FDAD98 /* LibPusher.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		667F82241DECA38200FDAD98 /* Private Headers */ = {
+			isa = PBXGroup;
+			children = (
+				667F82251DECA38200FDAD98 /* NSDictionary+QueryString.h */,
+				667F82261DECA38200FDAD98 /* NSDictionary+StringValue.h */,
+				667F82271DECA38200FDAD98 /* NSString+Hashing.h */,
+				667F82281DECA38200FDAD98 /* PTBlockEventListener.h */,
+				667F82291DECA38200FDAD98 /* PTJSON.h */,
+				667F822A1DECA38200FDAD98 /* PTPusherChannel_Private.h */,
+				667F822B1DECA38200FDAD98 /* PTTargetActionEventListener.h */,
+			);
+			path = "Private Headers";
+			sourceTree = "<group>";
+		};
+		667F824B1DECA38200FDAD98 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				667F824C1DECA38200FDAD98 /* LICENSE */,
+				667F824D1DECA38200FDAD98 /* README.rst */,
+				667F824E1DECA38200FDAD98 /* SocketRocket */,
+			);
+			path = SocketRocket;
+			sourceTree = "<group>";
+		};
+		667F824E1DECA38200FDAD98 /* SocketRocket */ = {
+			isa = PBXGroup;
+			children = (
+				667F824F1DECA38200FDAD98 /* SocketRocket.h */,
+				667F82501DECA38200FDAD98 /* SRWebSocket.h */,
+				667F82511DECA38200FDAD98 /* SRWebSocket.m */,
+			);
+			path = SocketRocket;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		667F820F1DECA2F700FDAD98 /* RNRealtimePusher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 667F82191DECA2F700FDAD98 /* Build configuration list for PBXNativeTarget "RNRealtimePusher" */;
+			buildPhases = (
+				667F820C1DECA2F700FDAD98 /* Sources */,
+				667F820D1DECA2F700FDAD98 /* Frameworks */,
+				667F820E1DECA2F700FDAD98 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RNRealtimePusher;
+			productName = RNRealtimePusher;
+			productReference = 667F82101DECA2F700FDAD98 /* libRNRealtimePusher.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		667F82081DECA2F700FDAD98 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0810;
+				ORGANIZATIONNAME = "Mark Jamieson";
+				TargetAttributes = {
+					667F820F1DECA2F700FDAD98 = {
+						CreatedOnToolsVersion = 8.1;
+						DevelopmentTeam = 9HQXA8934U;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 667F820B1DECA2F700FDAD98 /* Build configuration list for PBXProject "RNRealtimePusher" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 667F82071DECA2F700FDAD98;
+			productRefGroup = 667F82111DECA2F700FDAD98 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				667F820F1DECA2F700FDAD98 /* RNRealtimePusher */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		667F820C1DECA2F700FDAD98 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				667F82551DECA38200FDAD98 /* PTBlockEventListener.m in Sources */,
+				667F82521DECA38200FDAD98 /* NSDictionary+QueryString.m in Sources */,
+				667F82531DECA38200FDAD98 /* NSDictionary+StringValue.m in Sources */,
+				667F82601DECA38200FDAD98 /* PTURLRequestOperation.m in Sources */,
+				667F82611DECA38200FDAD98 /* SRWebSocket.m in Sources */,
+				667F82561DECA38200FDAD98 /* PTJSON.m in Sources */,
+				667F825F1DECA38200FDAD98 /* PTTargetActionEventListener.m in Sources */,
+				667F82541DECA38200FDAD98 /* NSString+Hashing.m in Sources */,
+				667F825A1DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				667F82591DECA38200FDAD98 /* PTPusherChannel.m in Sources */,
+				667F825B1DECA38200FDAD98 /* PTPusherConnection.m in Sources */,
+				667F82581DECA38200FDAD98 /* PTPusherAPI.m in Sources */,
+				667F825D1DECA38200FDAD98 /* PTPusherEventDispatcher.m in Sources */,
+				667F821E1DECA34B00FDAD98 /* Pusher.m in Sources */,
+				667F82571DECA38200FDAD98 /* PTPusher.m in Sources */,
+				667F825E1DECA38200FDAD98 /* PTPusherMockConnection.m in Sources */,
+				667F825C1DECA38200FDAD98 /* PTPusherEvent.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		667F82171DECA2F700FDAD98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		667F82181DECA2F700FDAD98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		667F821A1DECA2F700FDAD98 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 9HQXA8934U;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/** $(SRCROOT)/../../react-native/Libraries/**";
+			};
+			name = Debug;
+		};
+		667F821B1DECA2F700FDAD98 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = 9HQXA8934U;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				USER_HEADER_SEARCH_PATHS = "$(SRCROOT)/../../react-native/React/** $(SRCROOT)/../../react-native/Libraries/**";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		667F820B1DECA2F700FDAD98 /* Build configuration list for PBXProject "RNRealtimePusher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				667F82171DECA2F700FDAD98 /* Debug */,
+				667F82181DECA2F700FDAD98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		667F82191DECA2F700FDAD98 /* Build configuration list for PBXNativeTarget "RNRealtimePusher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				667F821A1DECA2F700FDAD98 /* Debug */,
+				667F821B1DECA2F700FDAD98 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 667F82081DECA2F700FDAD98 /* Project object */;
+}

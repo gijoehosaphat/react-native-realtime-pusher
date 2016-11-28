@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "02AD8B17F2A279AB8829B6D5EFDF492F167A36D5",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "02AD8B17F2A279AB8829B6D5EFDF492F167A36D5" : 9223372036854775807,
+    "0C5E104D87BA6D62BD59907519F7A34339B159E9" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "3BF166A1-5A15-4DCF-A539-B3EE995DC22D",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "02AD8B17F2A279AB8829B6D5EFDF492F167A36D5" : "react-native-realtime-pusher\/",
+    "0C5E104D87BA6D62BD59907519F7A34339B159E9" : ".."
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "RNRealtimePusher",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "RNRealtimePusher\/RNRealtimePusher.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/gijoehosaphat\/react-native-realtime-pusher",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "02AD8B17F2A279AB8829B6D5EFDF492F167A36D5"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "gitlab.com:healthymation\/why-wait-mobile.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "0C5E104D87BA6D62BD59907519F7A34339B159E9"
+    }
+  ]
+}
