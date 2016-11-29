@@ -7,6 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		662A9B321DEDD6540040A499 /* Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B141DEDD6540040A499 /* Base64.m */; };
+		662A9B331DEDD6540040A499 /* UNIBaseRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B171DEDD6540040A499 /* UNIBaseRequest.m */; };
+		662A9B341DEDD6540040A499 /* UNIBodyRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B191DEDD6540040A499 /* UNIBodyRequest.m */; };
+		662A9B351DEDD6540040A499 /* UNISimpleRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B1B1DEDD6540040A499 /* UNISimpleRequest.m */; };
+		662A9B361DEDD6540040A499 /* UNIHTTPBinaryResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B1E1DEDD6540040A499 /* UNIHTTPBinaryResponse.m */; };
+		662A9B371DEDD6540040A499 /* UNIHTTPJsonResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B201DEDD6540040A499 /* UNIHTTPJsonResponse.m */; };
+		662A9B381DEDD6540040A499 /* UNIHTTPResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B221DEDD6540040A499 /* UNIHTTPResponse.m */; };
+		662A9B391DEDD6540040A499 /* UNIHTTPStringResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B241DEDD6540040A499 /* UNIHTTPStringResponse.m */; };
+		662A9B3A1DEDD6540040A499 /* UNIJsonNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B261DEDD6540040A499 /* UNIJsonNode.m */; };
+		662A9B3B1DEDD6540040A499 /* UNIHTTPClientHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B281DEDD6540040A499 /* UNIHTTPClientHelper.m */; };
+		662A9B3C1DEDD6540040A499 /* UNIHTTPRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B2A1DEDD6540040A499 /* UNIHTTPRequest.m */; };
+		662A9B3D1DEDD6540040A499 /* UNIHTTPRequestWithBody.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B2C1DEDD6540040A499 /* UNIHTTPRequestWithBody.m */; };
+		662A9B3E1DEDD6540040A499 /* UNIRest.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B2F1DEDD6540040A499 /* UNIRest.m */; };
+		662A9B3F1DEDD6540040A499 /* UNIUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 662A9B311DEDD6540040A499 /* UNIUrlConnection.m */; };
 		667F821E1DECA34B00FDAD98 /* Pusher.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F821D1DECA34B00FDAD98 /* Pusher.m */; };
 		667F82521DECA38200FDAD98 /* NSDictionary+QueryString.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82211DECA38200FDAD98 /* NSDictionary+QueryString.m */; };
 		667F82531DECA38200FDAD98 /* NSDictionary+StringValue.m in Sources */ = {isa = PBXBuildFile; fileRef = 667F82221DECA38200FDAD98 /* NSDictionary+StringValue.m */; };
@@ -41,6 +55,35 @@
 /* Begin PBXFileReference section */
 		662A9AEB1DECBF8E0040A499 /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		662A9AED1DECBFB70040A499 /* libicucore.A.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.A.tbd; path = usr/lib/libicucore.A.tbd; sourceTree = SDKROOT; };
+		662A9B131DEDD6540040A499 /* Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Base64.h; sourceTree = "<group>"; };
+		662A9B141DEDD6540040A499 /* Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Base64.m; sourceTree = "<group>"; };
+		662A9B161DEDD6540040A499 /* UNIBaseRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIBaseRequest.h; sourceTree = "<group>"; };
+		662A9B171DEDD6540040A499 /* UNIBaseRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBaseRequest.m; sourceTree = "<group>"; };
+		662A9B181DEDD6540040A499 /* UNIBodyRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIBodyRequest.h; sourceTree = "<group>"; };
+		662A9B191DEDD6540040A499 /* UNIBodyRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIBodyRequest.m; sourceTree = "<group>"; };
+		662A9B1A1DEDD6540040A499 /* UNISimpleRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNISimpleRequest.h; sourceTree = "<group>"; };
+		662A9B1B1DEDD6540040A499 /* UNISimpleRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNISimpleRequest.m; sourceTree = "<group>"; };
+		662A9B1D1DEDD6540040A499 /* UNIHTTPBinaryResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPBinaryResponse.h; sourceTree = "<group>"; };
+		662A9B1E1DEDD6540040A499 /* UNIHTTPBinaryResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPBinaryResponse.m; sourceTree = "<group>"; };
+		662A9B1F1DEDD6540040A499 /* UNIHTTPJsonResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPJsonResponse.h; sourceTree = "<group>"; };
+		662A9B201DEDD6540040A499 /* UNIHTTPJsonResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPJsonResponse.m; sourceTree = "<group>"; };
+		662A9B211DEDD6540040A499 /* UNIHTTPResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPResponse.h; sourceTree = "<group>"; };
+		662A9B221DEDD6540040A499 /* UNIHTTPResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPResponse.m; sourceTree = "<group>"; };
+		662A9B231DEDD6540040A499 /* UNIHTTPStringResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPStringResponse.h; sourceTree = "<group>"; };
+		662A9B241DEDD6540040A499 /* UNIHTTPStringResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPStringResponse.m; sourceTree = "<group>"; };
+		662A9B251DEDD6540040A499 /* UNIJsonNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIJsonNode.h; sourceTree = "<group>"; };
+		662A9B261DEDD6540040A499 /* UNIJsonNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIJsonNode.m; sourceTree = "<group>"; };
+		662A9B271DEDD6540040A499 /* UNIHTTPClientHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPClientHelper.h; sourceTree = "<group>"; };
+		662A9B281DEDD6540040A499 /* UNIHTTPClientHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPClientHelper.m; sourceTree = "<group>"; };
+		662A9B291DEDD6540040A499 /* UNIHTTPRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPRequest.h; sourceTree = "<group>"; };
+		662A9B2A1DEDD6540040A499 /* UNIHTTPRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPRequest.m; sourceTree = "<group>"; };
+		662A9B2B1DEDD6540040A499 /* UNIHTTPRequestWithBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIHTTPRequestWithBody.h; sourceTree = "<group>"; };
+		662A9B2C1DEDD6540040A499 /* UNIHTTPRequestWithBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIHTTPRequestWithBody.m; sourceTree = "<group>"; };
+		662A9B2D1DEDD6540040A499 /* Unirest-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Unirest-Prefix.pch"; sourceTree = "<group>"; };
+		662A9B2E1DEDD6540040A499 /* UNIRest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIRest.h; sourceTree = "<group>"; };
+		662A9B2F1DEDD6540040A499 /* UNIRest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIRest.m; sourceTree = "<group>"; };
+		662A9B301DEDD6540040A499 /* UNIUrlConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UNIUrlConnection.h; sourceTree = "<group>"; };
+		662A9B311DEDD6540040A499 /* UNIUrlConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UNIUrlConnection.m; sourceTree = "<group>"; };
 		667F82101DECA2F700FDAD98 /* libRNRealtimePusher.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libRNRealtimePusher.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		667F821C1DECA34B00FDAD98 /* Pusher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Pusher.h; sourceTree = "<group>"; };
 		667F821D1DECA34B00FDAD98 /* Pusher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Pusher.m; sourceTree = "<group>"; };
@@ -112,9 +155,62 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		662A9B121DEDD6540040A499 /* Unirest */ = {
+			isa = PBXGroup;
+			children = (
+				662A9B131DEDD6540040A499 /* Base64.h */,
+				662A9B141DEDD6540040A499 /* Base64.m */,
+				662A9B151DEDD6540040A499 /* HttpRequest */,
+				662A9B1C1DEDD6540040A499 /* HttpResponse */,
+				662A9B271DEDD6540040A499 /* UNIHTTPClientHelper.h */,
+				662A9B281DEDD6540040A499 /* UNIHTTPClientHelper.m */,
+				662A9B291DEDD6540040A499 /* UNIHTTPRequest.h */,
+				662A9B2A1DEDD6540040A499 /* UNIHTTPRequest.m */,
+				662A9B2B1DEDD6540040A499 /* UNIHTTPRequestWithBody.h */,
+				662A9B2C1DEDD6540040A499 /* UNIHTTPRequestWithBody.m */,
+				662A9B2D1DEDD6540040A499 /* Unirest-Prefix.pch */,
+				662A9B2E1DEDD6540040A499 /* UNIRest.h */,
+				662A9B2F1DEDD6540040A499 /* UNIRest.m */,
+				662A9B301DEDD6540040A499 /* UNIUrlConnection.h */,
+				662A9B311DEDD6540040A499 /* UNIUrlConnection.m */,
+			);
+			path = Unirest;
+			sourceTree = "<group>";
+		};
+		662A9B151DEDD6540040A499 /* HttpRequest */ = {
+			isa = PBXGroup;
+			children = (
+				662A9B161DEDD6540040A499 /* UNIBaseRequest.h */,
+				662A9B171DEDD6540040A499 /* UNIBaseRequest.m */,
+				662A9B181DEDD6540040A499 /* UNIBodyRequest.h */,
+				662A9B191DEDD6540040A499 /* UNIBodyRequest.m */,
+				662A9B1A1DEDD6540040A499 /* UNISimpleRequest.h */,
+				662A9B1B1DEDD6540040A499 /* UNISimpleRequest.m */,
+			);
+			path = HttpRequest;
+			sourceTree = "<group>";
+		};
+		662A9B1C1DEDD6540040A499 /* HttpResponse */ = {
+			isa = PBXGroup;
+			children = (
+				662A9B1D1DEDD6540040A499 /* UNIHTTPBinaryResponse.h */,
+				662A9B1E1DEDD6540040A499 /* UNIHTTPBinaryResponse.m */,
+				662A9B1F1DEDD6540040A499 /* UNIHTTPJsonResponse.h */,
+				662A9B201DEDD6540040A499 /* UNIHTTPJsonResponse.m */,
+				662A9B211DEDD6540040A499 /* UNIHTTPResponse.h */,
+				662A9B221DEDD6540040A499 /* UNIHTTPResponse.m */,
+				662A9B231DEDD6540040A499 /* UNIHTTPStringResponse.h */,
+				662A9B241DEDD6540040A499 /* UNIHTTPStringResponse.m */,
+				662A9B251DEDD6540040A499 /* UNIJsonNode.h */,
+				662A9B261DEDD6540040A499 /* UNIJsonNode.m */,
+			);
+			path = HttpResponse;
+			sourceTree = "<group>";
+		};
 		667F82071DECA2F700FDAD98 = {
 			isa = PBXGroup;
 			children = (
+				662A9B121DEDD6540040A499 /* Unirest */,
 				667F821F1DECA38200FDAD98 /* libPusher */,
 				667F824B1DECA38200FDAD98 /* SocketRocket */,
 				667F82121DECA2F700FDAD98 /* RNRealtimePusher */,
@@ -284,21 +380,35 @@
 			files = (
 				667F82551DECA38200FDAD98 /* PTBlockEventListener.m in Sources */,
 				667F82521DECA38200FDAD98 /* NSDictionary+QueryString.m in Sources */,
+				662A9B3E1DEDD6540040A499 /* UNIRest.m in Sources */,
 				667F82531DECA38200FDAD98 /* NSDictionary+StringValue.m in Sources */,
 				667F82601DECA38200FDAD98 /* PTURLRequestOperation.m in Sources */,
+				662A9B3A1DEDD6540040A499 /* UNIJsonNode.m in Sources */,
 				667F82611DECA38200FDAD98 /* SRWebSocket.m in Sources */,
 				667F82561DECA38200FDAD98 /* PTJSON.m in Sources */,
 				667F825F1DECA38200FDAD98 /* PTTargetActionEventListener.m in Sources */,
 				667F82541DECA38200FDAD98 /* NSString+Hashing.m in Sources */,
 				667F825A1DECA38200FDAD98 /* PTPusherChannelServerBasedAuthorization.m in Sources */,
+				662A9B351DEDD6540040A499 /* UNISimpleRequest.m in Sources */,
 				667F82591DECA38200FDAD98 /* PTPusherChannel.m in Sources */,
+				662A9B371DEDD6540040A499 /* UNIHTTPJsonResponse.m in Sources */,
 				667F825B1DECA38200FDAD98 /* PTPusherConnection.m in Sources */,
+				662A9B391DEDD6540040A499 /* UNIHTTPStringResponse.m in Sources */,
+				662A9B3F1DEDD6540040A499 /* UNIUrlConnection.m in Sources */,
 				667F82581DECA38200FDAD98 /* PTPusherAPI.m in Sources */,
 				667F825D1DECA38200FDAD98 /* PTPusherEventDispatcher.m in Sources */,
+				662A9B331DEDD6540040A499 /* UNIBaseRequest.m in Sources */,
 				667F821E1DECA34B00FDAD98 /* Pusher.m in Sources */,
 				667F82571DECA38200FDAD98 /* PTPusher.m in Sources */,
+				662A9B3D1DEDD6540040A499 /* UNIHTTPRequestWithBody.m in Sources */,
 				667F825E1DECA38200FDAD98 /* PTPusherMockConnection.m in Sources */,
+				662A9B361DEDD6540040A499 /* UNIHTTPBinaryResponse.m in Sources */,
+				662A9B3B1DEDD6540040A499 /* UNIHTTPClientHelper.m in Sources */,
+				662A9B321DEDD6540040A499 /* Base64.m in Sources */,
+				662A9B3C1DEDD6540040A499 /* UNIHTTPRequest.m in Sources */,
+				662A9B341DEDD6540040A499 /* UNIBodyRequest.m in Sources */,
 				667F825C1DECA38200FDAD98 /* PTPusherEvent.m in Sources */,
+				662A9B381DEDD6540040A499 /* UNIHTTPResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
