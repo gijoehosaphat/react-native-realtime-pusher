@@ -17,8 +17,6 @@ NSString *messageEndPoint;
 NSString *appKey;
 NSString *connectionState = @"DISCONNECTED";
 
-NSMutableArray *channels;
-
 PTPusher *client;
 
 @synthesize bridge = _bridge;
@@ -31,8 +29,6 @@ RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  m
     authToken = _authToken;
     messageEndPoint = [NSString stringWithFormat:@"%@%@", _host, _messageSubPath];
     appKey = _appKey;
-    
-    channels = [[NSMutableArray alloc] init];
 }
 
 RCT_EXPORT_METHOD(connect)
@@ -51,15 +47,41 @@ RCT_EXPORT_METHOD(disconnect)
 
 RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NSString *)_channelEventName)
 {
+    PTPusherChannel *channel;
     if ([_channelName hasPrefix:@"private-"]){
-        PTPusherChannel *channel = [client subscribeToPrivateChannelNamed:[_channelName substringFromIndex:8]];
-        
-        [channel bindToEventNamed:_channelEventName handleWithBlock:^(PTPusherEvent *event) {
-            [self sendEvent:@{@"eventName": event.name, @"channelName": event.channel, @"data": event.data}];
-        }];
-        
-        [channels addObject:channel];
+        channel = [client subscribeToPrivateChannelNamed:[_channelName substringFromIndex:8]];
+    } else if ([_channelName hasPrefix:@"presence-"]){
+        channel = [client subscribeToPresenceChannelNamed:[_channelName substringFromIndex:9]];
+    } else {
+        channel = [client subscribeToChannelNamed:_channelName];
     }
+    
+    [channel bindToEventNamed:_channelEventName handleWithBlock:^(PTPusherEvent *event) {
+        [self sendEvent:@{@"eventName": event.name, @"channelName": event.channel, @"data": event.data}];
+    }];
+}
+
+RCT_EXPORT_METHOD(channelUnsubscribe:(NSString *)_channelName)
+{
+    [[client channelNamed:_channelName] unsubscribe];
+}
+
+RCT_EXPORT_METHOD(messagePost:(NSDictionary *)_messageObject channelName:(NSString *)_channelName channelEvent:(NSString *)_channelEvent)
+{
+    NSString *url = [NSString stringWithFormat:@"%@/%@/%@", messageEndPoint, _channelName, _channelEvent];
+    NSDictionary* headers = @{@"Content-Type": @"application/json", @"Authorization": authToken};
+    
+    UNIHTTPJsonResponse *response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
+        [request setUrl:url];
+        [request setHeaders:headers];
+        [request setBody:[NSJSONSerialization dataWithJSONObject:_messageObject options:0 error:nil]];
+    }] asStringAsync:^(UNIHTTPStringResponse *stringResponse, NSError *error) {
+        if (error == nil){
+            [self sendEvent:@{@"eventName": @"onMessageSuccess", @"channelName":_channelName}];
+        } else {
+            [self sendEvent:@{@"eventName": @"onMessageFailure", @"channelName":_channelName, @"error":error.localizedDescription}];
+        }
+    }];
 }
 
 
@@ -82,6 +104,14 @@ RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NS
 
 - (void)pusher:(PTPusher *)pusher connection:(PTPusherConnection *)connection didDisconnectWithError:(NSError *)error willAttemptReconnect:(BOOL)willAttemptReconnect{
     [self changeConnectionState:@"DISCONNECTED"];
+}
+
+- (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel{
+    [self sendEvent:@{@"eventName": @"onSubscriptionSucceeded", @"channelName":channel.name}];
+}
+
+- (void)pusher:(PTPusher *)pusher didFailToSubscribeToChannel:(PTPusherChannel *)channel withError:(NSError *)error{
+    [self sendEvent:@{@"eventName": @"onAuthenticationFailure", @"channelName":channel.name, @"error": error.localizedDescription}];
 }
 
 - (void) changeConnectionState:(NSString *)newState{
