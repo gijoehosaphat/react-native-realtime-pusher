@@ -24,12 +24,13 @@
     "type": "git",
     "url": "git+ssh://git@github.com/gijoehosaphat/react-native-realtime-pusher.git"
   },
-  "version": "1.0.7",
+  "version": "1.0.8",
   "keywords": [
     "react-component",
     "react-native",
     "android",
-    "pusher"
+    "pusher",
+    "ios"
   ],
   "peerDependencies": {
     "react-native": ">=0.20.0"

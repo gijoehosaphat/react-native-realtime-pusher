@@ -1,8 +1,6 @@
 # react-native-realtime-pusher
 Implementing the Pusher Realtime API.
 
-***CURRENTLY ANDROID ONLY***
-
 ## Installation ##
 
 `npm install react-native-realtime-pusher --save`
@@ -35,6 +33,3 @@ new PusherPackage(this)
 ```javascript
 import Pusher from 'react-native-realtime-pusher'
 ```
-
-## TODO:
-1. Add similar support to iOS
