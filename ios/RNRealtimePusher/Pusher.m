@@ -94,7 +94,7 @@ RCT_EXPORT_METHOD(messagePost:(NSDictionary *)_messageObject channelName:(NSStri
         [request setHeaders:headers];
         [request setParameters:params];
     }] asJsonAsync:^(UNIHTTPJsonResponse *jsonResponse, NSError *error) {
-        completionHandler(YES, jsonResponse.body.JSONObject, nil);
+        completionHandler(jsonResponse.code == 200, jsonResponse.body.JSONObject, nil);
     }];
 }
 
