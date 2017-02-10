@@ -31,7 +31,7 @@ repositories {
 }
 
 dependencies {
-  compile 'com.pusher:pusher-java-client:1.2.2'
+  compile 'com.pusher:pusher-java-client:1.4.0'
   compile 'com.squareup.okhttp3:okhttp:3.4.1'
   compile 'com.google.code.gson:gson:2.2.4'
   compile 'com.facebook.react:react-native:+'
