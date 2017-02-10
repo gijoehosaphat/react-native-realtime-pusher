@@ -23,65 +23,116 @@ PTPusher *client;
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  messageSubPath:(NSString *)_messageSubPath appKey:(NSString *)_appKey authToken:(NSString *)_authToken)
+RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  messageSubPath:(NSString *)_messageSubPath appKey:(NSString *)_appKey authToken:(NSString *)_authToken resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     authEndPoint = [NSString stringWithFormat:@"%@%@", _host, _authPath];
     authToken = _authToken;
     messageEndPoint = [NSString stringWithFormat:@"%@%@", _host, _messageSubPath];
     appKey = _appKey;
+    resolve(@{
+              @"host": _host,
+              @"authPath": _authPath,
+              @"messageSubPath": _messageSubPath,
+              @"appKey": appKey,
+              @"authToken": authToken
+              });
 }
 
-RCT_EXPORT_METHOD(connect)
+RCT_EXPORT_METHOD(connect:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [self changeConnectionState:@"CONNECTING"];
-    client = [PTPusher pusherWithKey:appKey delegate:self encrypted:YES];
-    client.channelAuthorizationDelegate = self;
-    [client connect];
+    @try {
+        [self changeConnectionState:@"CONNECTING"];
+        client = [PTPusher pusherWithKey:appKey delegate:self encrypted:YES];
+        client.channelAuthorizationDelegate = self;
+        [client connect];
+        resolve(@YES);
+    }
+    @catch (NSException *exception){
+        reject(@"connect_failed", @"Connect failed", exception);
+    }
 }
 
-RCT_EXPORT_METHOD(disconnect)
+RCT_EXPORT_METHOD(disconnect:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [self changeConnectionState:@"DISCONNECTING"];
-    [client disconnect];
+    @try {
+        [self changeConnectionState:@"DISCONNECTING"];
+        [client disconnect];
+        resolve(@YES);
+    }
+    @catch (NSException *exception){
+        reject(@"disconnect_failed", @"Disconnect failed", exception);
+    }
 }
 
-RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NSString *)_channelEventName)
+RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NSString *)_channelEventName resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    PTPusherChannel *channel;
-    if ([_channelName hasPrefix:@"private-"]){
-        channel = [client subscribeToPrivateChannelNamed:[_channelName substringFromIndex:8]];
-    } else if ([_channelName hasPrefix:@"presence-"]){
-        channel = [client subscribeToPresenceChannelNamed:[_channelName substringFromIndex:9]];
-    } else {
-        channel = [client subscribeToChannelNamed:_channelName];
+    @try {
+        PTPusherChannel *channel;
+        if ([_channelName hasPrefix:@"private-"]){
+            channel = [client subscribeToPrivateChannelNamed:[_channelName substringFromIndex:8]];
+        } else if ([_channelName hasPrefix:@"presence-"]){
+            channel = [client subscribeToPresenceChannelNamed:[_channelName substringFromIndex:9]];
+        } else {
+            channel = [client subscribeToChannelNamed:_channelName];
+        }
+        
+        [channel bindToEventNamed:_channelEventName handleWithBlock:^(PTPusherEvent *event) {
+            [self sendEvent:@{@"eventName": event.name, @"channelName": event.channel, @"data": event.data}];
+        }];
+        resolve(@{
+                  @"channelName": _channelName,
+                  @"channelEventName": _channelEventName
+                  });
+    }
+    @catch (NSException *exception){
+        reject(@"channel_subscribe_failed", @"Channel subscribe failed", exception);
     }
     
-    [channel bindToEventNamed:_channelEventName handleWithBlock:^(PTPusherEvent *event) {
-        [self sendEvent:@{@"eventName": event.name, @"channelName": event.channel, @"data": event.data}];
-    }];
 }
 
-RCT_EXPORT_METHOD(channelUnsubscribe:(NSString *)_channelName)
+RCT_EXPORT_METHOD(channelUnsubscribe:(NSString *)_channelName resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    [[client channelNamed:_channelName] unsubscribe];
+    @try{
+        [[client channelNamed:_channelName] unsubscribe];
+        resolve(@{
+                  @"channelName": _channelName
+                  });
+    }
+    @catch (NSException *exception){
+        reject(@"channel_unsubscribe_failed", @"Channel Unsubscribe failed", exception);
+    }
 }
 
-RCT_EXPORT_METHOD(messagePost:(NSDictionary *)_messageObject channelName:(NSString *)_channelName channelEvent:(NSString *)_channelEvent)
+RCT_EXPORT_METHOD(messagePost:(NSDictionary *)_messageObject channelName:(NSString *)_channelName channelEvent:(NSString *)_channelEvent resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    NSString *url = [NSString stringWithFormat:@"%@/%@/%@", messageEndPoint, _channelName, _channelEvent];
-    NSDictionary* headers = @{@"Content-Type": @"application/json", @"Authorization": authToken};
-    
-    UNIHTTPJsonResponse *response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
-        [request setUrl:url];
-        [request setHeaders:headers];
-        [request setBody:[NSJSONSerialization dataWithJSONObject:_messageObject options:0 error:nil]];
-    }] asStringAsync:^(UNIHTTPStringResponse *stringResponse, NSError *error) {
-        if (error == nil){
-            [self sendEvent:@{@"eventName": @"onMessageSuccess", @"channelName":_channelName}];
-        } else {
-            [self sendEvent:@{@"eventName": @"onMessageFailure", @"channelName":_channelName, @"error":error.localizedDescription}];
-        }
-    }];
+    @try {
+        NSString *url = [NSString stringWithFormat:@"%@/%@/%@", messageEndPoint, _channelName, _channelEvent];
+        NSDictionary* headers = @{@"Content-Type": @"application/json", @"Authorization": authToken};
+        
+        UNIHTTPJsonResponse *response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
+            [request setUrl:url];
+            [request setHeaders:headers];
+            [request setBody:[NSJSONSerialization dataWithJSONObject:_messageObject options:0 error:nil]];
+        }] asStringAsync:^(UNIHTTPStringResponse *stringResponse, NSError *error) {
+            if (error == nil){
+                [self sendEvent:@{@"eventName": @"onMessageSuccess", @"channelName":_channelName}];
+            } else {
+                [self sendEvent:@{@"eventName": @"onMessageFailure", @"channelName":_channelName, @"error":error.localizedDescription}];
+            }
+        }];
+        resolve(@{
+                  @"channelName": _channelName,
+                  @"channelEvent": _channelEvent
+                  });
+    }
+    @catch (NSException *exception){
+        reject(@"message_post_failed", @"Message post failed", exception);
+    }
+}
+
+RCT_EXPORT_METHOD(getConnectionState:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    resolve(connectionState);
 }
 
 
