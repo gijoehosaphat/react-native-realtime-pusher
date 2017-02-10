@@ -57,6 +57,7 @@ import java.io.IOException;
 public class PusherModule extends ReactContextBaseJavaModule {
     private Activity mActivity = null;
     private ReactApplicationContext mContext = null;
+    private String connectionState = null;
 
     private String authEndPoint = null;
     private String authToken = null;
@@ -77,68 +78,96 @@ public class PusherModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initialize(String host, String authPath, String messageSubPath, String appKey, String authToken) {
+    public void initialize(String host, String authPath, String messageSubPath, String appKey, String authToken, Promise promise) {
         this.authEndPoint = host + authPath;
         this.authToken = authToken;
         this.messageEndPoint = host + messageSubPath;
         this.appKey = appKey;
+
+        WritableMap map = Arguments.createMap();
+        map.putString("host", host);
+        map.putString("authPath", authPath);
+        map.putString("messageSubPath", messageSubPath);
+        map.putString("appKey", appKey);
+        map.putString("authToken", authToken);
+        promise.resolve(map);
     }
 
     @ReactMethod
-    public void connect() {
-        //Define our authorization headers...
-        HashMap<String, String> authHeaders = new HashMap<>();
-        authHeaders.put("Content-Type", "application/x-www-form-urlencoded");
-        authHeaders.put("Authorization", this.authToken);
+    public void connect(Promise promise) {
+        try {
+          //Define our authorization headers...
+          HashMap<String, String> authHeaders = new HashMap<>();
+          authHeaders.put("Content-Type", "application/x-www-form-urlencoded");
+          authHeaders.put("Authorization", this.authToken);
 
-        //Set up our HttpAuthorizer
-        HttpAuthorizer authorizer = new HttpAuthorizer(this.authEndPoint);
-        authorizer.setHeaders(authHeaders);
+          //Set up our HttpAuthorizer
+          HttpAuthorizer authorizer = new HttpAuthorizer(this.authEndPoint);
+          authorizer.setHeaders(authHeaders);
 
-        //Apply to pusher options and create our Pusher object.
-        PusherOptions options = new PusherOptions().setEncrypted(true).setAuthorizer(authorizer);
-        this.pusher = new Pusher(appKey, options);
+          //Apply to pusher options and create our Pusher object.
+          PusherOptions options = new PusherOptions().setEncrypted(true).setAuthorizer(authorizer);
+          this.pusher = new Pusher(appKey, options);
 
-        //Connect and handle events...
-        if (this.pusher != null) {
-            this.pusher.connect(new ConnectionEventListener() {
-                    @Override
-                    public void onConnectionStateChange(ConnectionStateChange change) {
-                        WritableMap params = Arguments.createMap();
-                        params.putString("eventName", "connectionStateChange");
-                        params.putString("currentState", change.getCurrentState().toString());
-                        params.putString("previousState", change.getPreviousState().toString());
-                        sendEvent(params);
-                    }
+          //Connect and handle events...
+          this.pusher.connect(new ConnectionEventListener() {
+              @Override
+              public void onConnectionStateChange(ConnectionStateChange change) {
+                  setConnectionState(change.getCurrentState().toString());
+                  WritableMap params = Arguments.createMap();
+                  params.putString("eventName", "connectionStateChange");
+                  params.putString("currentState", change.getCurrentState().toString());
+                  params.putString("previousState", change.getPreviousState().toString());
+                  sendEvent(params);
+              }
 
-                    @Override
-                    public void onError(String message, String code, Exception e) {
-                        WritableMap params = Arguments.createMap();
-                        params.putString("eventName", "connectionStateChange");
-                        params.putString("message", message);
-                        params.putString("code", code);
-                        sendEvent(params);
-                    }
-                }, ConnectionState.ALL);
+              @Override
+              public void onError(String message, String code, Exception e) {
+                  WritableMap params = Arguments.createMap();
+                  params.putString("eventName", "connectionStateChange");
+                  params.putString("message", message);
+                  params.putString("code", code);
+                  sendEvent(params);
+              }
+          }, ConnectionState.ALL);
+
+          promise.resolve(true);
+        } catch(Exception ex) {
+          promise.reject(ex);
         }
     }
 
     @ReactMethod
-    public void disconnect() {
-        //Unsubscribe to all channels...
-        for (int i = 0; i < channels.size(); i++) {
-            channelUnsubscribe(channels.get(i));
-        }
-        channels = new ArrayList<String>();
+    public void disconnect(Promise promise) {
+        try {
+          //Unsubscribe to all channels...
+          for (int i = 0; i < channels.size(); i++) {
+              this.pusher.unsubscribe(channels.get(i));
+          }
+          channels = new ArrayList<String>();
 
-        //Disconnect
-        if (this.pusher != null) {
-            this.pusher.disconnect();
+          //Disconnect
+          this.pusher.disconnect();
+          promise.resolve(true);
+        } catch (Exception ex) {
+          promise.reject(ex);
         }
     }
 
+    //Set our connectionState on the instance...
+    private void setConnectionState(String newConnectionState) {
+        this.connectionState = newConnectionState;
+    }
+
+    //Allow for ReactNative component to use this value to seed their initial
+    //state. Default value of Null or not we still report this value.
     @ReactMethod
-    public void channelSubscribe(String channelName, String channelEventName) {
+    public void getConnectionState(Promise promise) {
+        promise.resolve(this.connectionState);
+    }
+
+    @ReactMethod
+    public void channelSubscribe(String channelName, String channelEventName, Promise promise) {
         try {
             if (channelName.startsWith("private-")) {
                 channelPrivateSubscribe(channelName, channelEventName);
@@ -147,13 +176,15 @@ public class PusherModule extends ReactContextBaseJavaModule {
             } else {
                 channelPublicSubscribe(channelName, channelEventName);
             }
+            WritableMap map = Arguments.createMap();
+            map.putString("channelName", channelName);
+            map.putString("channelEventName", channelEventName);
+            promise.resolve(map);
         } catch (Exception ex) {
-            //Currently catching this, usually from oversubscribing. Apparently the
-            //Android library has issues needed to be worked out still.
+            promise.reject(ex);
         }
     }
 
-    @ReactMethod
     private void channelPublicSubscribe(final String channelName, final String channelEventName) {
         if (!channelIsSubscribed(channelName) && this.pusher != null) {
             Channel channel = this.pusher.subscribe(channelName, new ChannelEventListener() {
@@ -171,7 +202,6 @@ public class PusherModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod
     private void channelPrivateSubscribe(final String channelName, final String channelEventName) {
         if (!channelPrivateIsSubscribed(channelName) && this.pusher != null) {
             PrivateChannel channel = this.pusher.subscribePrivate(channelName, new PrivateChannelEventListener() {
@@ -194,7 +224,6 @@ public class PusherModule extends ReactContextBaseJavaModule {
         }
     }
 
-    @ReactMethod
     private void channelPresenceSubscribe(final String channelName, final String channelEventName) {
         if (!channelPresenceIsSubscribed(channelName) && this.pusher != null) {
             PresenceChannel channel = this.pusher.subscribePresence(channelName, new PresenceChannelEventListener() {
@@ -260,14 +289,18 @@ public class PusherModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void channelUnsubscribe(String channelName) {
-        if (this.pusher != null) {
-            this.pusher.unsubscribe(channelName);
+    public void channelUnsubscribe(String channelName, Promise promise) {
+        try {
+          this.pusher.unsubscribe(channelName);
+          WritableMap map = Arguments.createMap();
+          map.putString("channelName", channelName);
+          promise.resolve(map);
+        } catch (Exception ex) {
+          promise.reject(ex);
         }
     }
 
-    @ReactMethod
-    public Boolean channelIsSubscribed(String channelName) {
+    private Boolean channelIsSubscribed(String channelName) {
         Channel channel = null;
         if (this.pusher != null) {
             channel = this.pusher.getChannel(channelName);
@@ -275,8 +308,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
         return channel == null ? false : channel.isSubscribed();
     }
 
-    @ReactMethod
-    public Boolean channelPrivateIsSubscribed(String channelName) {
+    private Boolean channelPrivateIsSubscribed(String channelName) {
         PrivateChannel channel = null;
         if (this.pusher != null) {
             channel = this.pusher.getPrivateChannel(channelName);
@@ -284,8 +316,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
         return channel == null ? false : channel.isSubscribed();
     }
 
-    @ReactMethod
-    public Boolean channelPresenceIsSubscribed(String channelName) {
+    private Boolean channelPresenceIsSubscribed(String channelName) {
         PresenceChannel channel = null;
         if (this.pusher != null) {
             channel = this.pusher.getPresenceChannel(channelName);
@@ -294,43 +325,51 @@ public class PusherModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void messagePost(ReadableMap messageObject, final String channelName, final String channelEvent) {
-        Map<String, Object> map = recursivelyDeconstructReadableMap(messageObject);
-        Gson gson = new Gson();
-        String json = gson.toJson(map);
+    public void messagePost(ReadableMap messageObject, final String channelName, final String channelEvent, Promise promise) {
+        try {
+          Map<String, Object> map = recursivelyDeconstructReadableMap(messageObject);
+          Gson gson = new Gson();
+          String json = gson.toJson(map);
 
-        OkHttpClient client = new OkHttpClient();
-        Request request = new Request.Builder()
-            .url(this.messageEndPoint + "/" + channelName + "/" + channelEvent)
-            .header("Authorization", this.authToken)
-            .addHeader("Content-Type", "application/json")
-            .post(RequestBody.create(MediaType.parse("application/json"), json))
-            .build();
+          OkHttpClient client = new OkHttpClient();
+          Request request = new Request.Builder()
+              .url(this.messageEndPoint + "/" + channelName + "/" + channelEvent)
+              .header("Authorization", this.authToken)
+              .addHeader("Content-Type", "application/json")
+              .post(RequestBody.create(MediaType.parse("application/json"), json))
+              .build();
 
-        client.newCall(request).enqueue(new Callback() {
-            @Override public void onResponse(Call call, Response response) throws IOException {
-                if (!response.isSuccessful()) {
-                    WritableMap params = Arguments.createMap();
-                    params.putString("eventName", "onMessageFailure");
-                    params.putString("channelName", channelName);
-                    params.putString("exception", response.toString());
-                    sendEvent(params);
-                }
+          client.newCall(request).enqueue(new Callback() {
+              @Override public void onResponse(Call call, Response response) throws IOException {
+                  if (!response.isSuccessful()) {
+                      WritableMap params = Arguments.createMap();
+                      params.putString("eventName", "onMessageFailure");
+                      params.putString("channelName", channelName);
+                      params.putString("exception", response.toString());
+                      sendEvent(params);
+                  }
 
-                WritableMap params = Arguments.createMap();
-                params.putString("eventName", "onMessageSuccess");
-                params.putString("channelName", channelName);
-                sendEvent(params);
-            }
+                  WritableMap params = Arguments.createMap();
+                  params.putString("eventName", "onMessageSuccess");
+                  params.putString("channelName", channelName);
+                  sendEvent(params);
+              }
 
-            @Override public void onFailure(Call call, IOException e) {
-                WritableMap params = Arguments.createMap();
-                params.putString("eventName", "onMessageFailure");
-                params.putString("error", e.getMessage());
-                params.putString("channelName", channelName);
-                sendEvent(params);
-            }
-        });
+              @Override public void onFailure(Call call, IOException e) {
+                  WritableMap params = Arguments.createMap();
+                  params.putString("eventName", "onMessageFailure");
+                  params.putString("error", e.getMessage());
+                  params.putString("channelName", channelName);
+                  sendEvent(params);
+              }
+          });
+          WritableMap responseMap = Arguments.createMap();
+          responseMap.putString("channelName", channelName);
+          responseMap.putString("channelEvent", channelEvent);
+          promise.resolve(responseMap);
+        } catch (Exception ex) {
+          promise.reject(ex);
+        }
     }
 
     //A general Channel event...
@@ -394,7 +433,6 @@ public class PusherModule extends ReactContextBaseJavaModule {
     private WritableArray recursivelyDeconstructList(ArrayList<Object> list) {
         WritableArray writableArray = Arguments.createArray();
         for (int i = 0; i < list.size(); i++) {
-            System.out.println(list.get(i));
             if (list.get(i) == null) {
                 writableArray.pushNull();
             } else if (list.get(i).getClass() == String.class) {
