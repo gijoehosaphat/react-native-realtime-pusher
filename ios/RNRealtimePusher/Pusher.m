@@ -25,17 +25,23 @@ RCT_EXPORT_MODULE();
 
 RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  messageSubPath:(NSString *)_messageSubPath appKey:(NSString *)_appKey authToken:(NSString *)_authToken resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
-    authEndPoint = [NSString stringWithFormat:@"%@%@", _host, _authPath];
-    authToken = _authToken;
-    messageEndPoint = [NSString stringWithFormat:@"%@%@", _host, _messageSubPath];
-    appKey = _appKey;
-    resolve(@{
-              @"host": _host,
-              @"authPath": _authPath,
-              @"messageSubPath": _messageSubPath,
-              @"appKey": appKey,
-              @"authToken": authToken
-              });
+    @try{
+        connectionState = @"DISCONNECTED";
+        authEndPoint = [NSString stringWithFormat:@"%@%@", _host, _authPath];
+        authToken = _authToken;
+        messageEndPoint = [NSString stringWithFormat:@"%@%@", _host, _messageSubPath];
+        appKey = _appKey;
+        resolve(@{
+                  @"host": _host,
+                  @"authPath": _authPath,
+                  @"messageSubPath": _messageSubPath,
+                  @"appKey": _appKey,
+                  @"authToken": _authToken ? _authToken : [NSNull null]
+                  });
+    }
+    @catch (NSException *exception){
+        reject(@"initialize_failed", @"Initialize failed", exception);
+    }
 }
 
 RCT_EXPORT_METHOD(connect:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
