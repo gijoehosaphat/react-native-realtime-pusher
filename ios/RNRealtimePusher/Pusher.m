@@ -163,6 +163,11 @@ RCT_EXPORT_METHOD(getConnectionState:(RCTPromiseResolveBlock)resolve rejecter:(R
     [self changeConnectionState:@"DISCONNECTED"];
 }
 
+- (BOOL)pusher:(PTPusher *)pusher connectionWillAutomaticallyReconnect:(PTPusherConnection *)connection afterDelay:(NSTimeInterval)delay
+{
+    return NO;
+}
+
 - (void)pusher:(PTPusher *)pusher didSubscribeToChannel:(PTPusherChannel *)channel{
     [self sendEvent:@{@"eventName": @"onSubscriptionSucceeded", @"channelName":channel.name}];
 }
