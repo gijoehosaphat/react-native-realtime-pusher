@@ -37,7 +37,7 @@ import Pusher from 'react-native-realtime-pusher'
 // hostname ~= http://myserver.com
 // authPath ~= /auth
 // channelPath ~= /channel
-Pusher.initialize(hostname, authPath, channelPath, appKey, token) //This is a Promise
+Pusher.initialize(hostname, authPath, channelPath, appKey, cluster, token) //This is a Promise
 ...
 //Connect (There is also disconnect)
 Pusher.connect() //This is a Promise

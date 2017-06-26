@@ -63,6 +63,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
     private String authToken = null;
     private String messageEndPoint = null;
     private String appKey = null;
+    private String cluster = null;
     private Pusher pusher = null;
     private List<String> channels = new ArrayList<String>();
 
@@ -78,11 +79,12 @@ public class PusherModule extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void initialize(String host, String authPath, String messageSubPath, String appKey, String authToken, Promise promise) {
+    public void initialize(String host, String authPath, String messageSubPath, String appKey, String cluster, String authToken, Promise promise) {
         this.authEndPoint = host + authPath;
         this.authToken = authToken;
         this.messageEndPoint = host + messageSubPath;
         this.appKey = appKey;
+        this.cluster = cluster;
 
         WritableMap map = Arguments.createMap();
         map.putString("host", host);
@@ -107,6 +109,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
 
           //Apply to pusher options and create our Pusher object.
           PusherOptions options = new PusherOptions().setEncrypted(true).setAuthorizer(authorizer);
+          options.setCluster(this.cluster);
           this.pusher = new Pusher(appKey, options);
 
           //Connect and handle events...
@@ -127,6 +130,7 @@ public class PusherModule extends ReactContextBaseJavaModule {
                   params.putString("eventName", "connectionStateChange");
                   params.putString("message", message);
                   params.putString("code", code);
+                  params.putString("exceptionMessage", e.getMessage());
                   sendEvent(params);
               }
           }, ConnectionState.ALL);
