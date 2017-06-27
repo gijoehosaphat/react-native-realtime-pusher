@@ -15,6 +15,7 @@ NSString *authEndPoint;
 NSString *authToken;
 NSString *messageEndPoint;
 NSString *appKey;
+NSString *cluster;
 NSString *connectionState = @"DISCONNECTED";
 
 PTPusher *client;
@@ -23,7 +24,7 @@ PTPusher *client;
 
 RCT_EXPORT_MODULE();
 
-RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  messageSubPath:(NSString *)_messageSubPath appKey:(NSString *)_appKey authToken:(NSString *)_authToken resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  messageSubPath:(NSString *)_messageSubPath appKey:(NSString *)_appKey cluster:(NSString *)_cluster authToken:(NSString *)_authToken resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
 {
     @try{
         connectionState = @"DISCONNECTED";
@@ -31,11 +32,13 @@ RCT_EXPORT_METHOD(initialize:(NSString *)_host authPath:(NSString *)_authPath  m
         authToken = _authToken;
         messageEndPoint = [NSString stringWithFormat:@"%@%@", _host, _messageSubPath];
         appKey = _appKey;
+        cluster = _cluster;
         resolve(@{
                   @"host": _host,
                   @"authPath": _authPath,
                   @"messageSubPath": _messageSubPath,
                   @"appKey": _appKey,
+                  @"cluster": _cluster,
                   @"authToken": _authToken ? _authToken : [NSNull null]
                   });
     }
@@ -48,7 +51,7 @@ RCT_EXPORT_METHOD(connect:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRe
 {
     @try {
         [self changeConnectionState:@"CONNECTING"];
-        client = [PTPusher pusherWithKey:appKey delegate:self encrypted:YES];
+        client = [PTPusher pusherWithKey:appKey delegate:self encrypted:YES cluster:cluster];
         client.channelAuthorizationDelegate = self;
         [client connect];
         resolve(@YES);
@@ -81,7 +84,7 @@ RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NS
         } else {
             channel = [client subscribeToChannelNamed:_channelName];
         }
-        
+
         [channel bindToEventNamed:_channelEventName handleWithBlock:^(PTPusherEvent *event) {
             [self sendEvent:@{@"eventName": event.name, @"channelName": event.channel, @"data": event.data}];
         }];
@@ -93,7 +96,7 @@ RCT_EXPORT_METHOD(channelSubscribe:(NSString *)_channelName channelEventName:(NS
     @catch (NSException *exception){
         reject(@"channel_subscribe_failed", @"Channel subscribe failed", exception);
     }
-    
+
 }
 
 RCT_EXPORT_METHOD(channelUnsubscribe:(NSString *)_channelName resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
@@ -114,7 +117,7 @@ RCT_EXPORT_METHOD(messagePost:(NSDictionary *)_messageObject channelName:(NSStri
     @try {
         NSString *url = [NSString stringWithFormat:@"%@/%@/%@", messageEndPoint, _channelName, _channelEvent];
         NSDictionary* headers = @{@"Content-Type": @"application/json", @"Authorization": authToken};
-        
+
         UNIHTTPJsonResponse *response = [[UNIRest postEntity:^(UNIBodyRequest *request) {
             [request setUrl:url];
             [request setHeaders:headers];
