@@ -130,7 +130,6 @@ public class PusherModule extends ReactContextBaseJavaModule {
                   params.putString("eventName", "connectionStateChange");
                   params.putString("message", message);
                   params.putString("code", code);
-                  params.putString("exceptionMessage", e.getMessage());
                   sendEvent(params);
               }
           }, ConnectionState.ALL);
